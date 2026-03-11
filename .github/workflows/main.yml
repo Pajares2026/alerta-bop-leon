@@ -1,0 +1,23 @@
+name: Monitor BOP
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # Cada día a las 06:00 UTC
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Instalar librerías
+      run: pip install requests beautifulsoup4 pdfplumber
+
+    - name: Ejecutar script
+      run: python monitor_bop.py
